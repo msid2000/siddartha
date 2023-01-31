@@ -1,0 +1,12 @@
+---
+- name: java installtion on ubuntu
+  hosts: all
+  become: yes
+  vars:
+    version: "11"
+  tasks:
+    - name: java installation
+      ansible.builtin.apt: 
+        name: openjdk-{{ version }}-jdk
+        update_cache: true
+        state: present  
