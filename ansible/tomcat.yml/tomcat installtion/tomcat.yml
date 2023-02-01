@@ -53,7 +53,7 @@
         group: tomcat
     - name: Create a systemd conf file
       ansible.builtin.copy:
-        src: tomcat-users.xml
+        src: tomcat-user.xml
         dest: /opt/tomcat/latest/conf/tomcat-users.xml
         owner: tomcat
         group: tomcat
@@ -69,12 +69,14 @@
         dest: /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
         owner: tomcat
         group: tomcat
-    - name: reload daemon and start tomcat
+    - name: reload deamon        
+      ansible.builtin.systemd:
+        daemon_reload: true    
+    - name: start tomcat
       ansible.builtin.systemd:
         name: tomcat.service
-        daemon_reload: yes
         enabled: yes
         state: started
 
-
-        
+  
+   
