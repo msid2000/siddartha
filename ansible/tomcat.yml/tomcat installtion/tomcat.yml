@@ -2,83 +2,73 @@
 - name: tomcat installtion on ubuntu
   hosts: all
   become: yes
-  vars:
-    java_package_name: openjdk-11-jdk
-    tomcat_name: tomcat
-    tomcat_group: tomcat
-    tomcat_version: "10.0.27"
-    tomcat_major_version: "10"
-    tomcat_owner: tomcat
   tasks: 
     - name: java installtion
       ansible.builtin.apt:
-        name: "{{ java_package_name }}"
+        name: openjdk-11-jdk
         update_cache: yes
         state: present
     - name: creating tomcat group
       ansible.builtin.group:
-        name: "{{ tomcat_name }}"
+        name: tomcat
         state: present
     - name: create tomcat user
       ansible.builtin.user: 
-        name: "{{ tomcat_name }}"
-        group: "{{ tomcat_group }}"
-        create_home: yes
+        name: tomcat
+        group: tomcat
         shell: /bin/false
         home: /opt/tomcat
         state: present
     - name: download tomcat 
       ansible.builtin.get_url:
-        url: "https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }} /bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
-         remote_src: yes
-        dest: "/etc/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.5/bin/apache-tomcat-10.1.5.tar.gz
+        dest: /etc/apache-tomcat-10.1.5.tar.gz
     - name: unarchive tomcat
       ansible.builtin.unarchive:
-        src: "https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.5/bin/apache-tomcat-10.1.5.tar.gz
         remote_src: yes
         dest: /opt/tomcat/
     - name: create a symbolic link
       ansible.builtin.file:
-        src: "/opt/tomcat/apache-tomcat-{{ tomcat_version }}"
+        src: /opt/tomcat/apache-tomcat-10.1.5
         dest: /opt/tomcat/latest
         recurse: no
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
         state: link
     - name: changing permissions to file
       ansible.builtin.file:
         dest: /opt/tomcat
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
         state: directory
         mode: '0777'
-        recurse: yes
     - name: adding executive permissions to file
       ansible.builtin.command: sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
     - name: Create a systemd unit file
       ansible.builtin.copy:
         src: tomcat.service
         dest: /etc/systemd/system/tomcat.service
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
     - name: Create a systemd conf file
       ansible.builtin.copy:
         src: tomcat-user.xml
         dest: /opt/tomcat/latest/conf/tomcat-users.xml
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
     - name: Create a systemd manager context file
       ansible.builtin.copy:
         src: context.xml
         dest: /opt/tomcat/latest/webapps/manager/META-INF/context.xml
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
     - name: Create a systemd host_manager context file
       ansible.builtin.copy:
         src: context.xml
         dest: /opt/tomcat/latest/webapps/host-manager/META-INF/context.xml
-        owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}"
+        owner: tomcat
+        group: tomcat
     - name: reload deamon        
       ansible.builtin.systemd:
         daemon_reload: true    
