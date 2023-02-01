@@ -12,4 +12,8 @@
       ansible.builtin.url:
         url: https://deb.nodesource.com/setup_16.x 
         dest: /etc/setup_16.x 
-        
+    - name: install nodejs
+      ansible.builtin.apt:
+        name: nodejs
+        state: present
+
