@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   tasks:
-    - name: nodejs installtion
+    - name: install curl
       ansible.builtin.apt:
         name: nodejs
         update_cache: true
