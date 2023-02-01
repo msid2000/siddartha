@@ -1,0 +1,10 @@
+---
+- name: nodejs installation on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: nodejs installtion
+      ansible.builtin.apt:
+        name: nodejs
+        update_cache: true
+        state: present
