@@ -2,6 +2,8 @@
 - name: nodejs installation on ubuntu
   hosts: all
   become: yes
+  vars:
+    nodejs_version: 16.x
   tasks:
     - name: install curl
       ansible.builtin.apt:
@@ -10,8 +12,8 @@
         state: present
     - name: download nodejs
       ansible.builtin.uri:
-        url: https://deb.nodesource.com/setup_16.x 
-        dest: /etc/setup_16.x 
+        url: "https://deb.nodesource.com/setup_{{ nodejs_version }}"
+        dest: "/etc/setup_{{ nodejs_version }}" 
     - name: install nodejs
       ansible.builtin.apt:
         name: nodejs
