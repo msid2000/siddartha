@@ -30,6 +30,7 @@
     - name: download tomcat 
       ansible.builtin.get_url:
         url: "https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }} /bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+         remote_src: yes
         dest: "/etc/apache-tomcat-{{ tomcat_version }}.tar.gz"
     - name: unarchive tomcat
       ansible.builtin.unarchive:
