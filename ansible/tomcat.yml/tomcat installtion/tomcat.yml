@@ -59,7 +59,7 @@
         src: tomcat.service
         dest: /etc/systemd/system/tomcat.service
         owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}""
+        group: "{{ tomcat_group }}"
     - name: Create a systemd conf file
       ansible.builtin.copy:
         src: tomcat-user.xml
