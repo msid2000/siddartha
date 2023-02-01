@@ -9,7 +9,7 @@
         update_cache: true
         state: present
     - name: download nodejs
-      ansible.builtin.url:
+      ansible.builtin.uri:
         url: https://deb.nodesource.com/setup_16.x 
         dest: /etc/setup_16.x 
     - name: install nodejs
