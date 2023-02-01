@@ -1,0 +1,17 @@
+---
+- name: mysql
+    hosts: yes
+    become: yes
+    task:
+      - name: install apache on ubuntu
+        ansible.builtin.apt:
+          name: apache2
+          update_cache: yes
+          state: present
+      - name: mysql install
+        ansible.builtin.apt:
+          name: mysql
+          
+      - name: creation of file
+        ansible.builtin.file:
+          path: /var/www/html

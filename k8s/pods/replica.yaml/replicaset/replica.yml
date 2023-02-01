@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: nginx 1.22
+  lables:
+    app: nginx
+spec:
+  replicas: 3 
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - nginx
+          - webserver
+      -  key: In
+         operator: exist
+         
+  
