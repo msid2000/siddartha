@@ -6,48 +6,48 @@
     java_package_name: openjdk-11-jdk
     tomcat_name: tomcat
     tomcat_group: tomcat
-    tomcat_version: 10.0.27
-    tomcat_major_version: 10
+    tomcat_version: "10.0.27"
+    tomcat_major_version: "10"
     tomcat_owner: tomcat
   tasks: 
     - name: java installtion
       ansible.builtin.apt:
-        name: {{ java_package_name }}
+        name: "{{ java_package_name }}"
         update_cache: yes
         state: present
     - name: creating tomcat group
       ansible.builtin.group:
-        name: {{ tomcat_name }}
+        name: "{{ tomcat_name }}"
         state: present
     - name: create tomcat user
       ansible.builtin.user: 
-        name: {{ tomcat_name }}
-        group: {{ tomcat_group }}
+        name: "{{ tomcat_name }}"
+        group: "{{ tomcat_group }}"
         create_home: yes
         shell: /bin/false
         home: /opt/tomcat
         state: present
     - name: download tomcat 
       ansible.builtin.get_url:
-        url: https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }} /bin/apache-tomcat-{{ tomcat_version }}.tar.gz
-        dest: /etc/apache-tomcat-{{ tomcat_version }}.tar.gz
+        url: "https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }} /bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: "/etc/apache-tomcat-{{ tomcat_version }}.tar.gz"
     - name: unarchive tomcat
       ansible.builtin.unarchive:
-        src: https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz
+        src: "https://dlcdn.apache.org/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
         remote_src: yes
         dest: /opt/tomcat/
     - name: create a symbolic link
       ansible.builtin.file:
-        src: /opt/tomcat/apache-tomcat-{{ tomcat_version }}
+        src: "/opt/tomcat/apache-tomcat-{{ tomcat_version }}"
         dest: /opt/tomcat/latest
         recurse: no
         owner: "{{ tomcat_owner }}"
-        group: "{{ tomcat_group }}""
+        group: "{{ tomcat_group }}"
         state: link
     - name: changing permissions to file
       ansible.builtin.file:
         dest: /opt/tomcat
-        owner: "{{ tomcat_owner }}""
+        owner: "{{ tomcat_owner }}"
         group: "{{ tomcat_group }}"
         state: directory
         mode: '0777'
