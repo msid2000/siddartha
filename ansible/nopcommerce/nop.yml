@@ -28,7 +28,7 @@
         src: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
         remote_src: yes
-    - name: download nopcommerce
+    - name: download nopCommerce
       ansible.builtin.get_url:
         url:  https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
@@ -39,6 +39,19 @@
           - /etc/logs
         state: directory
         mode: '7777'
+    - name: changing group
+      ansible.builtin.file:
+        path: /etc/ www-data nopCommerce
+        owner: nopCommerce
+        group: nopCommerce
+    - name: changing owner for directory
+      ansible.builtin.file:
+        path: /etc/ www-data nopCommerce
+        owner: nopCommerce
+        group: nopCommerce
+      
+
+
 
         
 
