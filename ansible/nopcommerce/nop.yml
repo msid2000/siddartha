@@ -30,7 +30,10 @@
         remote_src: yes
     - name: download nopcommerce
       ansible.builtin.get_url:
-        name:
+        url:  https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
+        dest: /var/www/nopCommerce
+        group: nopCommerce
+        
 
     
 
