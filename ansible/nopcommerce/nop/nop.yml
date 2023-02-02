@@ -18,9 +18,6 @@
         name: nginx
         update_cache: yes
         state: present
-    - name: start nginx
-      ansible.builtin.systemd:
-        name: ngnix
-        state: started
+    
 
       
