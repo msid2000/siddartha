@@ -43,6 +43,7 @@
       ansible.builtin.systemd: 
         state: started
         name: nopCommerce
+        daemon_reload: yes
 
     
 
