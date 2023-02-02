@@ -44,7 +44,7 @@
         path: /etc/ www-data nopCommerce
         owner: nopCommerce
         group: nopCommerce
-        state: link
+        state: directory
     - name: changing owner for directory
       ansible.builtin.file:
         path: /etc/www-data nopCommerce
