@@ -6,7 +6,9 @@
     - name: download microsoft packages
       ansible.builtin.get_url:
         url: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    - name: microsoft debian package
-      ansible.builtin.dpkg:
-        name: packages microsoft
-        selection: install
+    - name: aspnetcore-runtime
+      ansible.builtin.apt:
+        name: install aspnetcore-runtime-7.0
+        update_cache: yes
+        state: present
+      
