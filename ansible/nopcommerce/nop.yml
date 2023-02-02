@@ -49,7 +49,7 @@
         path: /etc/www-data nopCommerce
         owner: nopCommerce
         group: nopCommerce 
-        state: link
+        mode: '7777'
       
 
 
