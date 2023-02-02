@@ -48,7 +48,8 @@
       ansible.builtin.file:
         path: /etc/ www-data nopCommerce
         owner: nopCommerce
-        group: nopCommerce
+        group: nopCommerce 
+        state: link
       
 
 
