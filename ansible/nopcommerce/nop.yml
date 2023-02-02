@@ -47,8 +47,7 @@
     - name: changing owner 
       ansible.builtin.file:
         path: /etc/www-data nopCommerce
-        owner: nopCommerce
-        group: nopCommerce 
+        owner: nopCommerce 
         state: link
         mode: '7777'
       
