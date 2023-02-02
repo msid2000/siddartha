@@ -32,25 +32,16 @@
       ansible.builtin.get_url:
         url:  https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
-    - name: creating a directory
+    - name: creating a directory and owner
       ansible.builtin.file:
         path: 
           - /etc/bin
           - /etc/logs
         state: directory
         mode: '7777'
-    - name: changing group
-      ansible.builtin.file:
-        path: /etc/ www-data nopCommerce
-        state: directory
-        mode: '7777'
-    - name: changing owner 
-      ansible.builtin.file:
-        path: /etc/www-data nopCommerce
-        owner: nopCommerce 
-        group: nopCommerce
-        mode: '7777'
-      
+    
+
+    
 
 
 
