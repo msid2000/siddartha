@@ -35,10 +35,15 @@
     - name: creating a directory and owner
       ansible.builtin.file:
         path: 
-          - /etc/bin
+          - /etc/binstarted
           - /etc/logs
         state: directory
         mode: '7777'
+    - name: start nopCommerce.service
+      ansible.builtin.systemd: 
+        state: started
+        name: nopCommerce
+
     
 
     
