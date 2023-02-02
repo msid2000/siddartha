@@ -41,12 +41,12 @@
         mode: '7777'
     - name: changing group
       ansible.builtin.file:
-        path: /etc/ www-data nopCommerce
+        path: /etc/www-data nopCommerce
         owner: nopCommerce
         group: nopCommerce
     - name: changing owner for directory
       ansible.builtin.file:
-        path: /etc/ www-data nopCommerce
+        path: /etc/www-data nopCommerce
         owner: nopCommerce
         group: nopCommerce 
         state: link
