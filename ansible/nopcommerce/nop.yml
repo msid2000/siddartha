@@ -44,7 +44,7 @@
         path: /etc/ www-data nopCommerce
         state: directory
         mode: '7777'
-    - name: changing owner for directory
+    - name: changing owner 
       ansible.builtin.file:
         path: /etc/www-data nopCommerce
         owner: nopCommerce
