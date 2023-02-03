@@ -36,13 +36,15 @@
         src: /tmp/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
         remote_src: yes
-    - name: creating a directory and owner
+   - name: creating bin dir
       ansible.builtin.file:
-        path: 
-          - /etc/bin
-          - /etc/logs
+        path: /var/www/nopCommerce/bin
         state: directory
-        mode: '7777'
+   - name: creating logs dir
+     ansible.builtin.file:
+       path: /var/www/nopCommerce/logs
+       state: directory
+       mode: '7777'
     - name: nopCommerce.file
       ansible.builtin.copy: 
         src: nopCommerce.service
