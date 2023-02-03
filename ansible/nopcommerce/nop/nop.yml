@@ -39,7 +39,19 @@
           - /etc/logs
         state: directory
         mode: '7777'
-    - name: start nopCommerce.service
+    - name: Create a nginx file
+      ansible.builtin.copy:
+        src: sites-available
+        dest: /etcnginx/sites-available/default
+        owner: nopCommerce
+        group: nopCommerce
+    - name: Create a nopCommerce.file
+      ansible.builtin.copy:
+        src: nopCommerce.service
+        dest: etc/systemd/system/nopCommerce.service
+        owner: nopCommerce
+        group: nopCommerce
+    - name: start 
       ansible.builtin.systemd: 
         state: started
         name: nopCommerce
