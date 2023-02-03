@@ -50,7 +50,6 @@
       ansible.builtin.copy: 
         src: nopCommerce.service
         dest: /etc/systemd/system/nopCommerce.service
-        remote_src: yes
     - name: copy nginx file
       ansible.builtin.copy:
         src: default
