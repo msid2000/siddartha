@@ -50,11 +50,21 @@
       ansible.builtin.copy: 
         src: nopCommerce.service
         dest: /etc/systemd/system/nopCommerce.service
+    - name: copy nginx file
+      ansible.builtin.copy:
+        src: default
+        dest: /etc/nginx/sites-available/default
     - name: starting nopCommerce.service
       ansible.builtin.systemd: 
         name: nopCommerce.service
         daemon_reload: yes
         state: started
+    - name: restart nginx
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: yes
+        name: nginx
+      
 
     
 
