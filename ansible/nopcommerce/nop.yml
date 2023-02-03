@@ -45,12 +45,13 @@
         mode: '7777'
     - name: nopCommerce.file
       ansible.builtin.copy: 
+        src: nopCommerce.service
         dest: /usr/binetc/systemd/system/nopCommerce.service
-    - name: start 
+    - name: starting nopCommerce.service
       ansible.builtin.systemd: 
-        state: started
-        name: nopCommerce
+        name: nopCommerce.service
         daemon_reload: yes
+        state: started
 
     
 
