@@ -30,7 +30,7 @@
     - name: unarchive nopcommerce
       ansible.builtin.unarchive:
         src: nopCommerce_4.60.1_NoSource_linux_x64.zip
-        dest:  /var/www/nopCommerceS
+        dest:  /var/www/nopCommerce
         remote_src: yes
     - name: creating a directory and owner
       ansible.builtin.file:
