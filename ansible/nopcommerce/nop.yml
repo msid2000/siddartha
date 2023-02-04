@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   tasks:
-    - name: download db packages
+    - name: download list of packages
       ansible.builtin.apt:
         deb: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb  
     - name: aspnetcore-runtime
@@ -22,30 +22,26 @@
       ansible.builtin.file:
         path: /var/www/nopCommerce
         state: directory
-        mode: '777'
-    - name: download nopCommerce
-      ansible.builtin.get_url:
-        url: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
-        dest: /tmp/nopCommerce_4.60.1_NoSource_linux_x64.zip
-        mode: '777'
+        mode: '0777'
     - name: install unzip
       ansible.builtin.apt:
         name: unzip 
         state: present
     - name: unzip nopcommerce
       ansible.builtin.unarchive:
-        src: /tmp/nopCommerce_4.60.1_NoSource_linux_x64.zip
+        src: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
         remote_src: yes
     - name: creating bin dir
       ansible.builtin.file:
         path: /var/www/nopCommerce/bin
+        mode: '0777'
         state: directory
     - name: creating logs dir
       ansible.builtin.file:
        path: /var/www/nopCommerce/logs
+       mode: '0777'
        state: directory
-       mode: '7777'
     - name: copying service file
       ansible.builtin.copy: 
         src: nopCommerce.service
@@ -62,9 +58,10 @@
         state: started
     - name: restart nginx
       ansible.builtin.systemd:
-        state: restarted
-        daemon_reload: yes
         name: nginx
+        daemon_reload: yes
+        state: restarted
+        
       
 
     
