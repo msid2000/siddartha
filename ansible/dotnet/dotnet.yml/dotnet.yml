@@ -4,22 +4,15 @@
   become: yes
   tasks:
     - name: install list of packages
-      ansible.builtin.get_url:
-        url: https://packages.microsoft.com/config/ubuntu/22.10/packages-microsoft-prod.deb
-        dest: /etc/packages-microsoft-prod.deb
-        mode: '0777'
-    - name: installing dotnet
       ansible.builtin.apt:
-      pkg: 
-        - dotnet-sdk-7.0
-        - aspnetcore-runtime-7.0
-        - microsoft-prod.deb
-      update_cache: yes
-      state: present
-
-
-      
-      
-        
+        deb: https://packages.microsoft.com/config/ubuntu/22.10/packages-microsoft-prod.deb 
+    - name: installing list of packages
+      ansible.builtin.apt:
+        update_cache: yes
+        pkg:
+          - dotnet-sdk-7.0
+          - aspnetcore-runtime-7.0
+          - dotnet-runtime-7.0
+        state: present
 
         
