@@ -20,11 +20,11 @@
         src: /home/jenkins/siddartha/ansible/openmrs-playbook
         dest: /opt/tomcat/webapps/
     - name: changing ownership of war
-        ansible.builtin.file:
-          path: /opt/tomcat/webapps/openmrs.war
-          owner: tomcat
-          group: tomcat
-          recurse: yes
+      ansible.builtin.file:
+        path: /opt/tomcat/webapps/openmrs.war
+        owner: tomcat
+        group: tomcat
+        recurse: yes
 
         
 
