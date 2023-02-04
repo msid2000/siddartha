@@ -37,6 +37,14 @@
         path: /opt/tomcat
         owner: tomcat
         group: tomcat
+    - name: adding executive permissions to tomcat
+      ansible.builtin.command: chmod -R g+r conf
+    - name : adding executing permissions 
+      ansible.builtin.command: chmod g+x conf
+    
+        
+    
+        
         
 
     
