@@ -5,7 +5,7 @@
   tasks:
     - name: install MYSQL
       ansible.builtin.apt:
-        name: mysql
+        name: mysql-server
         update_cache: yes
         only_upgrade: yes
         state: present
