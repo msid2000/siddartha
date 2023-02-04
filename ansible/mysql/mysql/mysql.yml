@@ -1,11 +1,11 @@
 ---
-- name: mysql installtion on ubuntu
+- name: MYSQL installtion on ubuntu
   hosts: all
   become: yes
   tasks:
-    - name: install mysql
+    - name: install MYSQL
       ansible.builtin.apt:
-        name: mysql-8.0.32
+        name: mysql
         update_cache: yes
         only_upgrade: yes
         state: present
