@@ -13,11 +13,11 @@
     - name: download OpenMRS_Platform_2.5.0
       ansible.builtin.get_url:
         url: https://sourceforge.net/projects/openmrs/files/releases/OpenMRS_Platform_2.5.0/openmrs.war
-        dest: /home/jenkins/siddartha/ansible/openmrs-playbook
-        mode: '0777'
+        dest: /etc/siddartha/ansible/openmrs-playbook
+        mode: '777'
     - name: copying war files
       ansible.builtin.copy:
-        src: /home/jenkins/siddartha/ansible/openmrs-playbook
+        src: /etc/siddartha/ansible/openmrs-playbook/openmrs.war
         dest: /opt/tomcat/webapps/
     - name: changing ownership of war
       ansible.builtin.file:
