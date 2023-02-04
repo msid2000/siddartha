@@ -35,7 +35,7 @@
     - name: change tomcat group
       ansible.builtin.file:
         path: /opt/tomcat
-        owner:tomcat
+        owner: tomcat
         group: tomcat
         
 
