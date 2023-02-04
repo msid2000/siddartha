@@ -19,15 +19,15 @@
         shell: /bin/false
         home: /opt/tomcat
         state: present
-    - name: download tomcat 
-      ansible.builtin.get_url:
-        url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz
-        dest: /etc/apache-tomcat-10.0.27.tar.gz
     - name: unarchive tomcat
       ansible.builtin.unarchive:
         src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz
         remote_src: yes
         dest: /opt/tomcat/
+    - name: download tomcat 
+      ansible.builtin.get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz
+        dest: /etc/apache-tomcat-10.0.27.tar.gz
     - name: create a symbolic link
       ansible.builtin.file:
         src: /opt/tomcat/apache-tomcat-10.0.27
@@ -43,6 +43,7 @@
         group: tomcat
         state: directory
         mode: '0777'
+        recurse: yes
     - name: adding executive permissions to file
       ansible.builtin.command: sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
     - name: Create a systemd unit file
