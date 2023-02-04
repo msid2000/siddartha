@@ -3,44 +3,32 @@
   hosts: all
   become: yes
   tasks:
-    - name: java installation
-      ansible.builtin.apt:
-        name: openjdk-8-jdk
-        update_cache: yes
-        state: present
-    - name: creating a tomcat group
-      ansible.builtin.group:
-        name: tomcat
-        state: present
-    - name: creating user in tomcat
-      ansible.builtin.user:
-        name: tomcat
-        group: tomcat
-        shell: /bin/false
-        home: /opt/tomcat
-        state: present
-    - name: tomcat download
-      ansible.builtin.get_url:
-        url: https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/apache-tomcat-7.0.109.tar.gz 
-        dest: /etc/apache-tomcat-7.0.109
-    - name: creating a directory for tomcat
+    - name: creating directory if not exist
       ansible.builtin.file:
-        path: /opt/tomcat
+        path: /var/lib/OpenMRS
         state: directory
-    - name: unarchive tomcat
-      ansible.builtin.unarchive:
-        src: https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/apache-tomcat-7.0.109.tar.gz
-        dest: /opt/tomcat/
-        remote_src: yes 
-    - name: change tomcat group
-      ansible.builtin.file:
-        path: /opt/tomcat
-        owner: tomcat
-        group: tomcat
-    - name: adding executive permissions to tomcat
-      ansible.builtin.command: sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+        mode: '0777'
+    - name: Recursively change ownership of a directory
+      ansible.builtin.command: chown -R tomcat:tomcat /var/lib/OpenMRS
+    - name: download OpenMRS_Platform_2.5.0
+      ansible.builtin.get_url:
+        url: https://sourceforge.net/projects/openmrs/files/releases/OpenMRS_Platform_2.5.0/openmrs.war
+        dest: /home/jenkins/siddartha/ansible/openmrs-playbook
+        mode: '0777'
+    - name: copying war files
+      ansible.builtin.copy:
+        src: /home/jenkins/siddartha/ansible/openmrs-playbook
+        dest: /opt/tomcat/webapps/
+    - name: changing ownership of war
+        ansible.builtin.file:
+          path: /opt/tomcat/webapps/openmrs.war
+          owner: tomcat
+          group: tomcat
+          recurse: yes
+
+        
+
       
-    
     
         
     
