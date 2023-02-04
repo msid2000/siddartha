@@ -38,8 +38,8 @@
         owner: tomcat
         group: tomcat
     - name: adding executive permissions to tomcat
-      ansible.builtin.command: sudo chmod -R g+r 
-      register: conf
+      ansible.builtin.command: sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+      
     
     
         
