@@ -23,6 +23,11 @@
       ansible.builtin.get_url:
         url: https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/apache-tomcat-7.0.109.tar.gz 
         dest: /etc/apache-tomcat-7.0.109
+    - name: creating a directory for tomcat
+      ansible.builtin.file:
+        path: /opt/tomcat
+        state: directory
+    
         
 
 
