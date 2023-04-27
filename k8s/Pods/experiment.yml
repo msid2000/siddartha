@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exe
+spec:
+  containers:
+    - name: alpine
+      image: alpine:3
+      ports: 80
+      args:
+        - sleep
+        - 1d
+
